@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 public class ArrayDeque<T> {
     private int front;
     private int rear;
@@ -37,7 +35,9 @@ public class ArrayDeque<T> {
      * prints the items in the deque
      */
     public void printDeque() {
-        for (int i = front; i != rear; i = (i + 1) % items.length) {
+        for (int i = front;
+             i != rear;
+             i = (i + 1) % items.length) {
             System.out.print(items[i] + " ");
         }
         System.out.println();
@@ -47,7 +47,9 @@ public class ArrayDeque<T> {
      * removes and returns the item at the front of the deque
      */
     public T removeFirst() {
-        if (size() == 0) return null;
+        if (size() == 0) {
+            return null;
+        }
         T ret = items[front];
         items[front] = null;
         front = (front + 1) % items.length;
@@ -61,19 +63,23 @@ public class ArrayDeque<T> {
      * removes and returns the item at the back of the deque
      */
     public T removeLast() {
-        if (size() == 0) return null;
+        if (size() == 0) {
+            return null;
+        }
         rear = (rear + items.length - 1) % items.length;
         T ret = items[rear];
         items[rear] = null;
-        if (size() < items.length / 4 && items.length / 2 >= 8) {
+        if (size() < items.length / 4
+                && items.length / 2 >= 8) {
             resize(items.length / 2);
         }
         return ret;
     }
 
     public T get(int i) {
-        if (i >= size())
+        if (i >= size()) {
             return null;
+        }
         return items[(front + i) % items.length];
     }
 
